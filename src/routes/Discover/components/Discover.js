@@ -25,9 +25,33 @@ export default class Discover extends Component {
       },
     })
 
+  fetchFeaturedPlaylists = async () =>
+    await axios.get(`${this.baseUrl}/v1/browse/featured-playlists`, {
+      headers: {
+        Authorization:
+          'Bearer BQAuSmuxPJTNaExpOjEg9pBVjGNhyLy3I4stzFJspXFa9EGM0-s7_ItuMZDCr0dheYDIH6PEpW7KFPPSJAKyh9i6Siqq-lxllmyZnx63Lpn9z1wfCPNG05O1PajVmrY9C93GpTRY7mefPGI',
+        'Content-Type': 'application/json',
+      },
+    })
+
+  fetchCategories = async () =>
+    await axios.get(`${this.baseUrl}/v1/browse/categories`, {
+      headers: {
+        Authorization: process.env.REACT_APP_AUTH_TOKEN,
+        'Content-Type': 'application/json',
+      },
+    })
+
   componentDidMount = async () => {
+    console.log(process.env.REACT_APP_AUTH_TOKEN)
     const newReleases = await this.fetchNewReleases()
-    this.setState({ newReleases: newReleases.data.albums.items })
+    const featuredPlaylists = await this.fetchFeaturedPlaylists()
+    const categories = await this.fetchCategories()
+    this.setState({
+      newReleases: newReleases.data.albums.items,
+      playlists: featuredPlaylists.data.playlists.items,
+      categories: categories.data.categories.items,
+    })
   }
 
   render() {
