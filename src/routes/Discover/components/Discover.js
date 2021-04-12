@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import DiscoverBlock from './DiscoverBlock/components/DiscoverBlock'
 import '../styles/_discover.scss'
 import axios from 'axios'
+import apiInfo from '../../../config'
 
 export default class Discover extends Component {
   constructor() {
@@ -12,12 +13,10 @@ export default class Discover extends Component {
       playlists: [],
       categories: [],
     }
-
-    this.baseUrl = 'https://api.spotify.com'
   }
 
   fetchNewReleases = async () =>
-    await axios.get(`${this.baseUrl}/v1/browse/new-releases`, {
+    await axios.get(`${apiInfo.api.baseUrl}/browse/new-releases`, {
       headers: {
         Authorization: process.env.REACT_APP_AUTH_TOKEN,
         'Content-Type': 'application/json',
@@ -25,7 +24,7 @@ export default class Discover extends Component {
     })
 
   fetchFeaturedPlaylists = async () =>
-    await axios.get(`${this.baseUrl}/v1/browse/featured-playlists`, {
+    await axios.get(`${apiInfo.api.baseUrl}/browse/featured-playlists`, {
       headers: {
         Authorization: process.env.REACT_APP_AUTH_TOKEN,
         'Content-Type': 'application/json',
@@ -33,7 +32,7 @@ export default class Discover extends Component {
     })
 
   fetchCategories = async () =>
-    await axios.get(`${this.baseUrl}/v1/browse/categories`, {
+    await axios.get(`${apiInfo.api.baseUrl}/browse/categories`, {
       headers: {
         Authorization: process.env.REACT_APP_AUTH_TOKEN,
         'Content-Type': 'application/json',
@@ -41,7 +40,6 @@ export default class Discover extends Component {
     })
 
   componentDidMount = async () => {
-    console.log(process.env.REACT_APP_AUTH_TOKEN)
     const newReleases = await this.fetchNewReleases()
     const featuredPlaylists = await this.fetchFeaturedPlaylists()
     const categories = await this.fetchCategories()
