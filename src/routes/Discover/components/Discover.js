@@ -19,8 +19,7 @@ export default class Discover extends Component {
   fetchNewReleases = async () =>
     await axios.get(`${this.baseUrl}/v1/browse/new-releases`, {
       headers: {
-        Authorization:
-          'Bearer BQAuSmuxPJTNaExpOjEg9pBVjGNhyLy3I4stzFJspXFa9EGM0-s7_ItuMZDCr0dheYDIH6PEpW7KFPPSJAKyh9i6Siqq-lxllmyZnx63Lpn9z1wfCPNG05O1PajVmrY9C93GpTRY7mefPGI',
+        Authorization: process.env.REACT_APP_AUTH_TOKEN,
         'Content-Type': 'application/json',
       },
     })
@@ -28,8 +27,7 @@ export default class Discover extends Component {
   fetchFeaturedPlaylists = async () =>
     await axios.get(`${this.baseUrl}/v1/browse/featured-playlists`, {
       headers: {
-        Authorization:
-          'Bearer BQAuSmuxPJTNaExpOjEg9pBVjGNhyLy3I4stzFJspXFa9EGM0-s7_ItuMZDCr0dheYDIH6PEpW7KFPPSJAKyh9i6Siqq-lxllmyZnx63Lpn9z1wfCPNG05O1PajVmrY9C93GpTRY7mefPGI',
+        Authorization: process.env.REACT_APP_AUTH_TOKEN,
         'Content-Type': 'application/json',
       },
     })
